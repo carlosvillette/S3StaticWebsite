@@ -18,4 +18,5 @@ jobs:
   - script: |
       echo Add other tasks to build, test, and deploy your project.
       echo See https://aka.ms/yaml
+      echo let's see some magic $(TF_ACCESS_KEY)
     displayName: 'Run a multi-line script'
