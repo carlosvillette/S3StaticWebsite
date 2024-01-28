@@ -18,7 +18,7 @@ jobs:
   - script: echo Hello, world!
     displayName: 'Run a one-line script'
 
-  - script: |
+  - bash: |
       echo Add other tasks to build, test, and deploy your project.
       echo See https://aka.ms/yaml
       echo let's see some magic $MY_MAPPED_ENV_VAR
