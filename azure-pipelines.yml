@@ -25,13 +25,13 @@ stages:
 
       - bash: |
           timedatectl
-          sudo ntpdate time.nist.gov
+          sudo timedatectl set-ntp off
+          sudo timedatectl set-ntp on
           timedatectl
           export AWS_ACCESS_KEY_ID=$MY_TF_ACCESS_KEY
           export AWS_SECRET_ACCESS_KEY=$MY_TF_SECRET_KEY
           terraform init
           terraform plan
-          terraform apply -auto-approve
         displayName: 'Run a multi-line script'
         env:
           MY_TF_ACCESS_KEY: $(TF_ACCESS_KEY)
