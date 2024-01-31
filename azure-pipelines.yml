@@ -21,10 +21,7 @@ stages:
         inputs:
           terraformVersion: 'latest'
         displayName: 'Install terraform'
-      - task: TerraformTaskV4@4
-        inputs:
-          provider: 'aws'
-          command: 'init'
+      
 
       - bash: |
           export AWS_ACCESS_KEY_ID=$MY_TF_ACCESS_KEY
