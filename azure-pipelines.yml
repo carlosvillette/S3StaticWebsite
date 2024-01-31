@@ -9,19 +9,27 @@ trigger:
 variables:
 - group: Terraform
 
-jobs:
-- job: job_1
-  pool:
-    vmImage: ubuntu-latest
+stages:
+  - stage: "terraform apply"
+    jobs:
+    - job: InstallTerraform
+      pool:
+        vmImage: ubuntu-latest
 
-  steps:
-  - script: echo Hello, world!
-    displayName: 'Run a one-line script'
+      steps:
+      - task: TerraformInstaller@1
+        inputs:
+          terraformVersion: 'latest'
+        displayName: 'Install terraform'
+      - task: TerraformTaskV4@4
+        inputs:
+          provider: 'aws'
+          command: 'init'
 
-  - bash: |
-      echo Add other tasks to build, test, and deploy your project.
-      echo let us see some magic: $MY_MAPPED_ENV_VAR
-      echo See https://aka.ms/yaml
-    displayName: 'Run a multi-line script'
-    env:
-      MY_MAPPED_ENV_VAR: $(TF_ACCESS_KEY)
+      - bash: |
+          echo Add other tasks to build, test, and deploy your project.
+          echo let us see some magic: $MY_MAPPED_ENV_VAR
+          echo See https://aka.ms/yaml
+        displayName: 'Run a multi-line script'
+        env:
+          MY_MAPPED_ENV_VAR: $(TF_ACCESS_KEY)
