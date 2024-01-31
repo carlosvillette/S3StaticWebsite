@@ -10,7 +10,7 @@ variables:
 - group: Terraform
 
 stages:
-  - stage: "terraform apply"
+  - stage: "terraform"
     jobs:
     - job: InstallTerraform
       pool:
