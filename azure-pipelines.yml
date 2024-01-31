@@ -17,19 +17,16 @@ stages:
         vmImage: ubuntu-latest
 
       steps:
-      - task: TerraformInstaller@1
+      - task: TerraformTaskV4@0
+        displayName: 'Install Terraform'
         inputs:
           terraformVersion: 'latest'
-        displayName: 'Install terraform'
-      - task: TerraformTaskV4@4
-        inputs:
-          provider: 'aws'
-          command: 'init'
 
       - bash: |
-          echo Add other tasks to build, test, and deploy your project.
-          echo let us see some magic: $MY_MAPPED_ENV_VAR
+          export AWS_ACCESS_KEY_ID=$MY_TF_ACCESS_KEY
+          export AWS_SECRET_ACCESS_KEY=$MY_TF_SECRET_KEY
           echo See https://aka.ms/yaml
         displayName: 'Run a multi-line script'
         env:
-          MY_MAPPED_ENV_VAR: $(TF_ACCESS_KEY)
+          MY_TF_ACCESS_KEY: $(TF_ACCESS_KEY)
+          MY_TF_SECRET_KEY: $(TF_SECRET_KEY)
